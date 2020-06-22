@@ -1,0 +1,7 @@
+{
+  "name": "location-monitoring",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
