@@ -2,7 +2,12 @@ import { Component } from '@angular/core';
 
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
-import { StatusBar } from '@ionic-native/status-bar/ngx';
+
+import {
+  Plugins,
+  StatusBarStyle,
+} from '@capacitor/core';
+const { StatusBar } = Plugins;
 
 @Component({
   selector: 'app-root',
@@ -13,14 +18,16 @@ export class AppComponent {
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
-    private statusBar: StatusBar
   ) {
     this.initializeApp();
   }
 
   initializeApp() {
     this.platform.ready().then(() => {
-      this.statusBar.styleDefault();
+      if (this.platform.is('capacitor')) {
+        StatusBar.setBackgroundColor({ color: "#5260ff" });
+        StatusBar.setStyle({ style: StatusBarStyle.Dark });
+      }
       this.splashScreen.hide();
     });
   }
